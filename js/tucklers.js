@@ -13,14 +13,45 @@
   /* ----------------------------------------------------------------- */
   /* Mobile side navigation                                            */
   /* ----------------------------------------------------------------- */
+  function navToggleBtn() { return document.querySelector(".toggle_icon"); }
+
   window.openNav = function () {
     var el = document.getElementById("mySidenav");
-    if (el) el.style.width = "100%";
+    if (!el) return;
+    el.style.width = "100%";
+    el.setAttribute("aria-hidden", "false");
+    var t = navToggleBtn();
+    if (t) t.setAttribute("aria-expanded", "true");
+    /* Move focus into the panel for keyboard users. */
+    var close = el.querySelector(".closebtn");
+    if (close) close.focus();
   };
   window.closeNav = function () {
     var el = document.getElementById("mySidenav");
-    if (el) el.style.width = "0";
+    if (!el) return;
+    el.style.width = "0";
+    el.setAttribute("aria-hidden", "true");
+    var t = navToggleBtn();
+    if (t) { t.setAttribute("aria-expanded", "false"); t.focus(); }
   };
+
+  function wireNavKeyboard() {
+    var t = navToggleBtn();
+    if (t) {
+      t.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+          e.preventDefault();
+          window.openNav();
+        }
+      });
+    }
+    /* Escape closes the slide-out from anywhere. */
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" && e.key !== "Esc") return;
+      var el = document.getElementById("mySidenav");
+      if (el && parseInt(el.style.width, 10) > 0) window.closeNav();
+    });
+  }
 
   /* ----------------------------------------------------------------- */
   /* Toast helper                                                      */
@@ -205,5 +236,6 @@
     wireContactForm();
     wireBackToTop();
     wireActiveNav();
+    wireNavKeyboard();
   });
 })();

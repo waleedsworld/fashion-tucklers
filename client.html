@@ -20,13 +20,15 @@
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Open+Sans:400,700&display=swap&subset=latin-ext" rel="stylesheet">
       <link rel="stylesheet" href="css/tucklers.css">
+      <link rel="stylesheet" href="css/ux-polish.css">
    </head>
    <body>
+      <a class="skip-link" href="#main-content">Skip to content</a>
       <!-- header -->
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-light justify-content-between">
-               <div id="mySidenav" class="sidenav">
+               <div id="mySidenav" class="sidenav" aria-hidden="true">
                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                   <a href="index.html">Home</a>
                   <a href="products.html">Products</a>
@@ -34,7 +36,7 @@
                   <a href="client.html">Reviews</a>
                   <a href="contact.html">Contact</a>
                </div>
-               <span class="toggle_icon" onclick="openNav()"><img src="images/toggle-icon.png" alt="Open menu"></span>
+               <span class="toggle_icon" role="button" tabindex="0" aria-controls="mySidenav" aria-expanded="false" aria-label="Open menu" onclick="openNav()"><img src="images/toggle-icon.png" alt=""></span>
                <a class="logo" href="index.html"><img src="images/logo.png" alt="Tucklers Soft Layers"></a>
                <div class="main_nav">
                   <a href="index.html">Home</a>
@@ -55,7 +57,7 @@
             </nav>
          </div>
       </div>
-      <div class="customer_section layout_padding">
+      <div class="customer_section layout_padding" id="main-content">
          <div class="container">
             <div class="row"><div class="col-sm-12">
                <p class="section-eyebrow">Kind Words</p>

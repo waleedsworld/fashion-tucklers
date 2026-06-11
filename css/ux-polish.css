@@ -1,0 +1,239 @@
+/* =====================================================================
+   ux-polish.css  —  Tucklers Soft Layers accessibility & UX layer
+   Loaded LAST so it can refine the base template + tucklers.css:
+   keyboard focus rings, a skip link, reduced-motion support, a full
+   dark theme, and a handful of text-contrast fixes for WCAG AA.
+   Purely additive — no markup depends on it to function.
+   ===================================================================== */
+
+/* ------------------------------------------------------------------ */
+/* Skip to content — first tab stop for keyboard / screen-reader users */
+/* ------------------------------------------------------------------ */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 2000;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 700;
+  border-radius: 0 0 10px 10px;
+  box-shadow: var(--shadow-md);
+  transition: top .2s ease;
+}
+.skip-link:focus { top: 0; }
+
+/* ------------------------------------------------------------------ */
+/* Visible keyboard focus — the base template kills outlines globally  */
+/* (a { outline:none !important } in style.css). Restore them for      */
+/* keyboard users only, so mouse clicks stay clean.                    */
+/* ------------------------------------------------------------------ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible,
+.filter-pill:focus-visible,
+.add-bag:focus-visible,
+.toggle_icon:focus-visible {
+  outline: 3px solid var(--accent) !important;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Make the burger keyboard-operable visually (it becomes role=button) */
+.toggle_icon { cursor: pointer; }
+
+/* ------------------------------------------------------------------ */
+/* Contrast fixes — #8a817a on the light paper is ~3.2:1, below the    */
+/* WCAG AA 4.5:1 floor for body copy. Darken to a compliant grey.      */
+/* ------------------------------------------------------------------ */
+.lorem_text,
+.feature-card p,
+.contact-card p { color: #6b6259; }
+.no-results { color: #6b6259; }
+
+/* ------------------------------------------------------------------ */
+/* Empty state polish (products search / filter)                       */
+/* ------------------------------------------------------------------ */
+.no-results {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  margin: 10px auto;
+  max-width: 460px;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion — honour the OS "minimise animation" preference.     */
+/* Comes after tucklers.css's `* { transition-duration:.25s }`, so at  */
+/* equal specificity this wins for users who ask for calm.             */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .product_box:hover,
+  .btn-tuck:hover,
+  .read_bt a:hover,
+  #back-to-top,
+  .cart-badge { transform: none !important; }
+}
+
+/* ================================================================== */
+/* DARK THEME                                                          */
+/* Warm, low-glare dark palette that keeps the copper accent. Applied  */
+/* automatically from the OS preference. Surfaces the base template    */
+/* hard-coded to #fff are re-skinned here so nothing goes black-on-    */
+/* black or white-on-white.                                            */
+/* ================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #17130e;
+    --paper-2: #211b14;
+    --line: #352c21;
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, .45);
+    --shadow-md: 0 16px 44px rgba(0, 0, 0, .60);
+  }
+
+  body { background: var(--paper); color: #d9cfc1; }
+  h1, h2, h3, h4 { color: #f4ece0; }
+  p { color: #cabfb0; }
+
+  /* Header ---------------------------------------------------------- */
+  .header_section {
+    background: rgba(23, 19, 14, .90);
+    border-bottom-color: var(--line);
+  }
+  .main_nav a { color: #ece3d6; }
+  .main_nav a.is-active { color: var(--accent); }
+
+  /* Hero ------------------------------------------------------------ */
+  .banner_section {
+    background: linear-gradient(160deg, #17130e 0%, #211b14 100%);
+  }
+
+  /* Cards & light surfaces ------------------------------------------ */
+  .product_box,
+  .feature-card,
+  .contact-card {
+    background: #201a13;
+    border-color: var(--line);
+  }
+  .product-media { background: #2a2219; }
+  .bursh_text,
+  .feature-card h4,
+  .contact-card h4 { color: #f1eadf; }
+  .lorem_text,
+  .feature-card p,
+  .contact-card p,
+  .no-results { color: #a89e8f; }
+  .feature-card i,
+  .contact-card i { color: var(--accent); }
+
+  /* Filter / search ------------------------------------------------- */
+  .filter-pill,
+  .shop-search {
+    background: #201a13;
+    border-color: var(--line);
+    color: #ece3d6;
+  }
+  .filter-pill:hover { border-color: var(--accent); }
+  .filter-pill.active {
+    background: var(--accent);
+    color: #1b140b;
+    border-color: var(--accent);
+  }
+  .shop-search::placeholder { color: #8a8072; }
+
+  /* Buttons — the base ink buttons vanish on a dark page, so invert    */
+  /* them: light chip by default, copper on hover.                     */
+  .btn-tuck,
+  .read_bt a, .seemore_bt a, .readmore_bt a,
+  .contact_bt a, .newletter_bt a {
+    background: #efe6d9 !important;
+    color: #1c1917 !important;
+  }
+  .btn-tuck:hover,
+  .read_bt a:hover, .seemore_bt a:hover, .readmore_bt a:hover,
+  .contact_bt a:hover, .newletter_bt a:hover {
+    background: var(--accent) !important;
+    color: #1b140b !important;
+  }
+  .btn-outline-tuck {
+    color: #efe6d9 !important;
+    border-color: #efe6d9 !important;
+  }
+  .btn-outline-tuck:hover {
+    background: #efe6d9 !important;
+    color: #1c1917 !important;
+  }
+  .add-bag { background: #efe6d9; color: #1c1917; }
+  .add-bag:hover { background: var(--accent); color: #1b140b; }
+  .add-bag.added { background: #3c9c63; color: #08120b; }
+
+  /* Forms ----------------------------------------------------------- */
+  .tuck-form input,
+  .tuck-form textarea,
+  .newsletter-form input {
+    background: #201a13;
+    border-color: var(--line);
+    color: #f0e8dc;
+  }
+  .tuck-form label { color: #e9e0d3; }
+  .tuck-form input::placeholder,
+  .tuck-form textarea::placeholder,
+  .newsletter-form input::placeholder { color: #8a8072; }
+  .tuck-form .field-error { color: #ef8a80; }
+  .tuck-form .invalid { border-color: #ef8a80; }
+  .form-status.ok { color: #6fca90; }
+
+  /* Newsletter panel (already dark — nudge it off the page bg) ------ */
+  .newsletter_section { background: #241d15; }
+  .newsletter_section p { color: #d3c9ba; }
+  .newsletter-note { color: #f0d9b8; }
+
+  /* Footer — base template re-inks these to the DARK brand colour for  */
+  /* a light footer; on a dark footer that's ink-on-ink, so relight it. */
+  .footer_section { background: #1c160f; }
+  .footer_section .address_text { color: #f1eadf !important; }
+  .footer_section .address_bt li a { color: #c3b9aa !important; }
+  .footer_section .address_bt li a:hover { color: var(--accent) !important; }
+  .footer_section .dummy_text,
+  .footer_section .ipsum_text { color: #b8ada0 !important; }
+  .social_icon ul li a i {
+    background: #221b13;
+    color: #ece3d6;
+    border-color: var(--line);
+  }
+  .social_icon ul li a i:hover {
+    background: var(--accent);
+    color: #1b140b;
+    border-color: var(--accent);
+  }
+  .copyright_section { background: #100c08; color: #b8ada0; }
+
+  /* Floating UI — keep readable against the dark canvas -------------- */
+  #back-to-top {
+    background: #efe6d9;
+    color: #1c1917;
+    border: 1px solid var(--line);
+  }
+  #back-to-top:hover { background: var(--accent); color: #1b140b; }
+  #toast {
+    background: #efe6d9;
+    color: #1c1917;
+    border: 1px solid rgba(0, 0, 0, .2);
+  }
+
+  /* Skip link ------------------------------------------------------- */
+  .skip-link { background: var(--accent); color: #1b140b; }
+}
