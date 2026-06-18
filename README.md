@@ -1,10 +1,30 @@
+<div align="center">
+
 # Tucklers Soft Layers 🧥
 
-> Jackets that feel like a hug. A fast, hand-built storefront landing site for **Tucklers Soft Layers** — bombers, puffers, leather and wool, all warmth and no bulk.
+### Jackets that feel like a hug — a fast, hand-built, zero-dependency storefront.
 
-No frameworks to install, no build step to babysit, no npm black holes. It's plain **HTML, CSS and vanilla JavaScript** — open it and it just *works*. (We like our stack the way we like our linings: soft and uncomplicated.)
+Bombers, puffers, leather and wool. All warmth, no bulk, no build step.
+
+[![Made with HTML5](https://img.shields.io/badge/HTML5-semantic-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-custom%20properties-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/docs/Web/CSS)
+[![Vanilla JS](https://img.shields.io/badge/JavaScript-vanilla-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![No build step](https://img.shields.io/badge/build-none-brightgreen)](#-get-it-running-yes-even-if-this-is-your-first-repo)
+[![Dependencies](https://img.shields.io/badge/npm%20deps-0-success)](#-built-with)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ![Tucklers home page](docs/media/home-desktop.png)
+
+</div>
+
+---
+
+## 🎬 See it in motion
+
+![Tucklers walkthrough](assets/demo.gif)
+
+> **Note:** `assets/demo.gif` is a placeholder. Drop in a real screen recording of the
+> filter, the shopping bag counter and the mobile menu to bring this section to life.
 
 ---
 
@@ -72,7 +92,43 @@ Then open **http://localhost:5766** in your browser. To stop the server, hit `Ct
 
 ---
 
-## 🗂️ Project structure
+## 🕹️ Using the site
+
+Everything is driven by plain HTML attributes and a single vanilla-JS file (`js/tucklers.js`) — no config, no API keys.
+
+| Feature | How to use it | Where it lives |
+| --- | --- | --- |
+| **Browse the catalog** | Open `products.html` — 12 jackets rendered as cards. | `products.html` |
+| **Filter by style** | Click a category chip (*Leather, Puffer, Denim, Wool, Outerwear*). | `[data-cat]` attribute |
+| **Live search** | Type in the search box; matching jackets fade in as you go. | `[data-name]` attribute |
+| **Add to bag** | Hit *Add to Bag* — the header counter increments and a toast confirms. | `data-name` on the button |
+| **Persistent bag** | The counter is stored in `localStorage`, so it survives refreshes and page changes. | `tucklers.js` |
+| **Contact form** | Fill in `contact.html`; empty fields and bad emails get friendly inline errors. | `contact.html` |
+| **Newsletter** | Enter an email in the footer "Layer List" — validated and remembered locally. | footer, every page |
+| **Mobile menu** | Shrink the window; the nav collapses into a full-screen slide-out. | responsive nav |
+
+### Adding a new jacket
+
+No JavaScript required. Copy any `.col-lg-3` product card in `products.html`, then set two data attributes:
+
+```html
+<div class="col-lg-3" data-cat="leather" data-name="Aviator Bomber">
+  <!-- image, title, price, Add-to-Bag button -->
+</div>
+```
+
+- `data-cat` — one of `leather`, `puffer`, `denim`, `wool`, `outerwear`.
+- `data-name` — the display name that search matches against.
+
+It slots straight into the filter **and** the live search automatically.
+
+---
+
+## 🗂️ Architecture
+
+A flat, static site — every page is a standalone HTML document that pulls in the same
+shared CSS and one behaviour script. There is no router, no bundler and no server-side
+code; the browser is the entire runtime.
 
 ```
 fashion-tucklers/
@@ -94,12 +150,17 @@ fashion-tucklers/
 │   ├── img-1.svg … img-12.svg  # Hand-authored jacket illustrations
 │   ├── hero-jacket.svg, about-jackets.svg
 │   └── logo.png, *-icon.png    # Brand + UI icons
-└── docs/media/         # Screenshots used in this README
+├── assets/
+│   └── demo.gif                # Walkthrough recording (placeholder)
+└── docs/media/                 # Screenshots used in this README
 ```
 
-Want to add a jacket? Copy a `.col-lg-3` product card in `products.html`, give it a
-`data-cat` (one of `leather`, `puffer`, `denim`, `wool`, `outerwear`) and a
-`data-name`, and it slots straight into the filter and search — no JS changes needed.
+**How the layers fit together:**
+
+- **Markup** — five hand-written pages sharing an identical header/footer so navigation feels seamless.
+- **Styling** — vendored Bootstrap handles the grid and carousel; `tucklers.css` layers the brand palette, cards, buttons and form styling on top via CSS custom properties.
+- **Behaviour** — `tucklers.js` is the single source of interactivity: bag counter, filter, live search, form validation, newsletter capture, back-to-top and toasts. It reads `data-*` attributes from the markup, so content and logic stay decoupled.
+- **State** — the only persisted state is the shopping-bag count and newsletter subscriber, both in `localStorage`. No cookies, no trackers, no network calls.
 
 ---
 
@@ -128,4 +189,14 @@ no bundlers, no analytics phoning home. Just honest front-end, made to be lived 
 
 ---
 
+## 📄 License
+
+Released under the [MIT License](LICENSE) — free to use, modify and build on.
+
+---
+
+<div align="center">
+
 Made with warmth. Now go layer up. 🧣
+
+</div>
