@@ -6,6 +6,12 @@ No frameworks to install, no build step to babysit, no npm black holes. It's pla
 
 ![Tucklers home page](docs/media/home-desktop.png)
 
+### 🎬 Take the tour
+
+A quick walk through the storefront — Home, Products, About, Reviews and Contact:
+
+![Tucklers site tour](assets/demo.gif)
+
 ---
 
 ## ✨ What's inside
