@@ -1,0 +1,412 @@
+/* =====================================================================
+   tucklers.css  —  Tucklers Soft Layers enhancement layer
+   Hand-built polish on top of the base Bootstrap styles: brand palette,
+   sticky header, product-card upgrades, cart badge, newsletter, forms,
+   toasts and back-to-top. Keep this file the single source of "new" CSS.
+   ===================================================================== */
+
+:root {
+  --ink: #1c1917;
+  --ink-soft: #3a3532;
+  --paper: #faf7f2;
+  --paper-2: #f1ebe2;
+  --accent: #c8873b;      /* warm copper — reads as "leather & layers" */
+  --accent-dark: #a86d29;
+  --line: #e6ddcf;
+  --radius: 14px;
+  --shadow-sm: 0 2px 10px rgba(28, 25, 23, .06);
+  --shadow-md: 0 14px 40px rgba(28, 25, 23, .12);
+}
+
+/* Tame the base template's global 0.5s "transition everything" so hovers
+   feel snappy instead of syrupy. */
+* { transition-duration: .25s !important; }
+
+/* The base template floats nearly every block (float:left) and relies on
+   clearfixes that no longer exist in this restructured, flex/grid layout —
+   which let the dark newsletter panel balloon and bleed behind other
+   sections. Return the section wrappers to normal block flow. */
+.header_section, .banner_section, .banner_taital, .banner_text,
+.product_section, .product_section_2, .product_taital, .product_text,
+.about_section, .about_section_main, .about_taital, .about_taital_main, .about_text,
+.customer_section, .customer_taital, .client_section_2,
+.contact_section, .contact_taital, .contact_text,
+.footer_section, .footer_logo, .footer_logo_1, .dummy_text, .address_bt,
+.address_text, .ipsum_text, .social_icon, .seemore_bt, .readmore_bt,
+.copyright_section, .copyright_text {
+  float: none !important;
+  width: auto !important;
+}
+.product_section, .customer_section, .about_section, .contact_section,
+.banner_section, .footer_section { display: block; clear: both; }
+
+body {
+  color: var(--ink-soft);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { color: var(--ink); }
+
+/* ------------------------------------------------------------------ */
+/* Sticky header                                                       */
+/* ------------------------------------------------------------------ */
+.header_section {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: rgba(250, 247, 242, .92);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.header_section .navbar { padding: .55rem 0; }
+.header_section .logo img { max-height: 52px; width: auto; }
+
+/* Top navigation shown inline on desktop (base template hides it behind a
+   burger at all sizes; give big screens a proper menu). */
+.main_nav { display: none; gap: 1.6rem; align-items: center; }
+.main_nav a {
+  position: relative;
+  font-weight: 600;
+  letter-spacing: .3px;
+  color: var(--ink);
+  padding: 4px 0;
+}
+.main_nav a::after {
+  content: "";
+  position: absolute; left: 0; bottom: -2px;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width .25s ease;
+}
+.main_nav a:hover::after,
+.main_nav a.is-active::after { width: 100%; }
+.main_nav a.is-active { color: var(--accent-dark); }
+
+@media (min-width: 992px) {
+  .main_nav { display: flex; }
+  .toggle_icon { display: none !important; }
+}
+
+/* Cart badge on the bag icon */
+.login_text ul { align-items: center; margin: 0; }
+.bag-wrap { position: relative; display: inline-block; }
+.cart-badge {
+  position: absolute;
+  top: -8px; right: -10px;
+  min-width: 18px; height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  transform: scale(0);
+  transition: transform .2s cubic-bezier(.2,1.4,.5,1);
+}
+.cart-badge.show { transform: scale(1); }
+
+/* ------------------------------------------------------------------ */
+/* Buttons                                                             */
+/* ------------------------------------------------------------------ */
+.btn-tuck,
+.read_bt a, .seemore_bt a, .readmore_bt a,
+.contact_bt a, .newletter_bt a {
+  display: inline-block;
+  background: var(--ink) !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 30px;
+  font-weight: 600;
+  letter-spacing: .4px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.btn-tuck:hover,
+.read_bt a:hover, .seemore_bt a:hover, .readmore_bt a:hover,
+.contact_bt a:hover, .newletter_bt a:hover {
+  background: var(--accent) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btn-outline-tuck {
+  background: transparent !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--ink) !important;
+}
+.btn-outline-tuck:hover {
+  background: var(--ink) !important;
+  color: #fff !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                                */
+/* ------------------------------------------------------------------ */
+.banner_section { background: linear-gradient(160deg, var(--paper) 0%, var(--paper-2) 100%); }
+.banner_taital { font-weight: 800; line-height: 1.05; }
+.banner_text { max-width: 34rem; }
+.hero-eyebrow {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: .5rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Section headings                                                    */
+/* ------------------------------------------------------------------ */
+.section-eyebrow {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+.product_taital, .customer_taital, .about_taital, .contact_taital {
+  font-weight: 800;
+}
+
+/* ------------------------------------------------------------------ */
+/* Product cards                                                       */
+/* ------------------------------------------------------------------ */
+.product_box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 18px 20px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.product_box:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.product-media {
+  background: var(--paper-2);
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.product_box img.image_1 {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 10px;
+  transition: transform .4s ease;
+}
+.product_box:hover img.image_1 { transform: scale(1.06); }
+.cat-tag {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: rgba(28,25,23,.85);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  z-index: 2;
+}
+.bursh_text { font-size: 17px; font-weight: 700; margin-bottom: 2px; }
+.lorem_text { font-size: 13px; color: #8a817a; min-height: 38px; }
+.product-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: auto; padding-top: 10px;
+}
+.price_text { color: var(--accent-dark); font-weight: 800; font-size: 18px; margin: 0; }
+.add-bag {
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.add-bag:hover { background: var(--accent); }
+.add-bag.added { background: #2f7d4f; }
+
+/* Filter / search bar */
+.shop-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 34px;
+}
+.filter-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.filter-pill {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.filter-pill:hover { border-color: var(--accent); }
+.filter-pill.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.shop-search {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 18px;
+  min-width: 240px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+}
+.shop-search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,135,59,.15); }
+.no-results { text-align: center; color: #8a817a; padding: 40px 0; display: none; }
+
+/* ------------------------------------------------------------------ */
+/* About / trust strip                                                 */
+/* ------------------------------------------------------------------ */
+.feature-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 10px 0 40px;
+}
+.feature-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.feature-card i { font-size: 26px; color: var(--accent); margin-bottom: 10px; }
+.feature-card h4 { font-size: 16px; margin-bottom: 6px; }
+.feature-card p { font-size: 13px; color: #8a817a; margin: 0; }
+
+/* ------------------------------------------------------------------ */
+/* Newsletter                                                          */
+/* ------------------------------------------------------------------ */
+.newsletter_section {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 46px 30px;
+  text-align: center;
+  margin: 60px auto;
+}
+.newsletter_section h2 { color: #fff; font-weight: 800; }
+.newsletter_section p { color: #cfc7bd; max-width: 30rem; margin: 6px auto 22px; }
+.newsletter-form {
+  display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; max-width: 520px; margin: 0 auto;
+}
+.newsletter-form input {
+  flex: 1 1 260px;
+  border: none;
+  border-radius: 999px;
+  padding: 13px 20px;
+  font-size: 15px;
+  outline: none;
+}
+.newsletter-note { font-size: 13px; margin-top: 14px; min-height: 20px; color: #f0d9b8; }
+
+/* ------------------------------------------------------------------ */
+/* Contact form                                                        */
+/* ------------------------------------------------------------------ */
+.tuck-form { max-width: 640px; }
+.tuck-form .form-group { margin-bottom: 16px; }
+.tuck-form label { font-weight: 600; font-size: 13px; color: var(--ink); margin-bottom: 6px; display: block; }
+.tuck-form input, .tuck-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 15px;
+  outline: none;
+  background: #fff;
+}
+.tuck-form input:focus, .tuck-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200,135,59,.15);
+}
+.tuck-form .field-error { color: #c0392b; font-size: 12px; margin-top: 4px; display: none; }
+.tuck-form .invalid { border-color: #c0392b; }
+.tuck-form .invalid + .field-error { display: block; }
+.form-status { margin-top: 14px; font-weight: 600; }
+.form-status.ok { color: #2f7d4f; }
+
+.contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; margin-bottom: 30px; }
+.contact-card { background:#fff; border:1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-sm); }
+.contact-card i { color: var(--accent); font-size: 20px; }
+.contact-card h4 { font-size: 15px; margin: 10px 0 4px; }
+.contact-card p { font-size: 14px; color:#8a817a; margin:0; }
+
+/* ------------------------------------------------------------------ */
+/* Footer polish                                                       */
+/* ------------------------------------------------------------------ */
+.footer_section { background: var(--paper-2); border-top: 1px solid var(--line); }
+/* Base template makes all footer text white; our footer is light, so re-ink it. */
+.footer_section .address_text { color: var(--ink) !important; font-size: 18px; letter-spacing: .5px; }
+.footer_section .address_bt li a { color: var(--ink-soft) !important; }
+.footer_section .address_bt li a:hover { color: var(--accent-dark) !important; }
+.footer_section .dummy_text,
+.footer_section .ipsum_text { color: var(--ink-soft) !important; }
+.footer_section .footer_logo_1 img { max-height: 46px; width: auto; }
+.social_icon ul li a i {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: #fff; color: var(--ink); border: 1px solid var(--line);
+}
+.social_icon ul li a i:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.copyright_section { background: var(--ink); color: #cfc7bd; padding: 16px 0; }
+.copyright_section a { color: var(--accent); }
+
+/* ------------------------------------------------------------------ */
+/* Back to top + toast                                                 */
+/* ------------------------------------------------------------------ */
+#back-to-top {
+  position: fixed; right: 22px; bottom: 22px;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--ink); color: #fff; border: none;
+  font-size: 18px; cursor: pointer; z-index: 1040;
+  opacity: 0; pointer-events: none; transform: translateY(10px);
+  box-shadow: var(--shadow-md);
+}
+#back-to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+#back-to-top:hover { background: var(--accent); }
+
+#toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 40px);
+  background: var(--ink); color: #fff;
+  padding: 12px 22px; border-radius: 999px;
+  font-size: 14px; font-weight: 600;
+  box-shadow: var(--shadow-md); z-index: 1050;
+  opacity: 0; pointer-events: none;
+}
+#toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* Sidenav (mobile) accent */
+.sidenav { background: var(--ink) !important; }
+.sidenav a { color: #e9e2d7 !important; }
+.sidenav a:hover { color: var(--accent) !important; }
+
+/* Small screens */
+@media (max-width: 575px) {
+  .banner_taital { font-size: 2.1rem; }
+  .newsletter_section { padding: 34px 18px; margin: 40px auto; }
+}
