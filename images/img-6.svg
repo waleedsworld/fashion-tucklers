@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6f1e9"/>
+      <stop offset="1" stop-color="#ece3d6"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#476888"/>
+      <stop offset="1" stop-color="#3f5c78"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <ellipse cx="256" cy="452" rx="150" ry="20" fill="#000000" opacity="0.06"/>
+  <g>
+    
+    
+      <path d="M182 172 L120 205 L108 330 L158 342 L188 240 Z" fill="#31475d"/>
+      <path d="M330 172 L392 205 L404 330 L354 342 L324 240 Z" fill="#31475d"/>
+      <path d="M182 172 L128 200 L118 322 L152 330 L186 232 Z" fill="#3f5c78"/>
+      <path d="M330 172 L384 200 L394 322 L360 330 L326 232 Z" fill="#3f5c78"/>
+    <path d="M188 168 Q256 150 324 168 L346 372 Q256 400 166 372 Z" fill="#3f5c78"/>
+    <path d="M188 168 Q256 150 324 168 L346 372 Q256 400 166 372 Z" fill="url(#body)" opacity="0.35"/>
+    <line x1="200" y1="210" x2="312" y2="210" stroke="#31475d" stroke-width="2" opacity="0.5"/><line x1="200" y1="246" x2="312" y2="246" stroke="#31475d" stroke-width="2" opacity="0.5"/><line x1="200" y1="282" x2="312" y2="282" stroke="#31475d" stroke-width="2" opacity="0.5"/>
+    <path d="M214 158 L256 210 L298 158 L281 150 L256 176 L231 150 Z" fill="#31475d"/>
+    <line x1="256" y1="176" x2="256" y2="388" stroke="#f0e9dd" stroke-width="5" stroke-dasharray="9 7"/>
+    
+      <rect x="196" y="300" width="46" height="54" rx="8" fill="#31475d"/>
+      <rect x="270" y="300" width="46" height="54" rx="8" fill="#31475d"/>
+  </g>
+</svg>
