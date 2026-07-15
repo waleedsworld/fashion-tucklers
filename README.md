@@ -103,6 +103,43 @@ Want to add a jacket? Copy a `.col-lg-3` product card in `products.html`, give i
 
 ---
 
+## 🧪 A/B testing
+
+A tiny, zero-dependency experiment harness lives in `js/ab-testing.js`. It gives
+each visitor a **sticky, deterministic variant** (bucketed from a locally-stored
+visitor id), buffers exposure and goal events in `localStorage`, and — unless you
+point it at an endpoint — never phones home.
+
+Run an experiment straight from markup. The home hero already ships one:
+
+```html
+<a href="…"
+   data-ab-experiment="hero_cta"
+   data-ab-variants="a,b"
+   data-ab-text-a="Shop Jackets"
+   data-ab-text-b="Shop the Collection"
+   data-ab-goal="hero_cta_click">Shop Jackets</a>
+```
+
+Supported per-variant overrides: `data-ab-text-<v>`, `data-ab-href-<v>`,
+`data-ab-class-<v>`, `data-ab-hide-<v>`. Any element with `data-ab-goal` records a
+tracked click.
+
+Prefer scripting? The same power sits on `window.abTest`:
+
+```js
+abTest.define("price_layout", [{ id: "a", weight: 3 }, { id: "b", weight: 1 }]);
+if (abTest.isVariant("price_layout", "b")) { /* show the new layout */ }
+abTest.track("checkout_started", { cart: 2 });
+
+abTest.on(function (e) { console.log(e.event, e.props); }); // live event hook
+abTest.getAssignments();  // { hero_cta: "a", … }
+abTest.getEvents();       // buffered payloads
+abTest.configure({ endpoint: "/collect" }); // opt-in beacon delivery
+```
+
+---
+
 ## 🎨 Making it yours
 
 Everything visual is tuned from a handful of CSS custom properties at the top of
