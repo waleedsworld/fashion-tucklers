@@ -72,8 +72,16 @@
                   <button class="filter-pill" data-filter="denim">Denim</button>
                   <button class="filter-pill" data-filter="wool">Wool</button>
                   <button class="filter-pill" data-filter="outerwear">Outerwear</button>
+                  <button class="filter-pill" data-filter="saved">♥ Saved</button>
                </div>
                <input type="search" id="shop-search" class="shop-search" placeholder="Search jackets…" aria-label="Search jackets">
+               <!-- Sort control — reorders the rack in place (see wireShop in tucklers.js) -->
+               <select id="shop-sort" class="shop-sort" aria-label="Sort jackets">
+                  <option value="featured">Featured</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="name-asc">Name: A–Z</option>
+               </select>
             </div>
             <div class="product_section_2">
                <div class="row" id="shop-grid">
