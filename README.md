@@ -157,6 +157,32 @@ Change `--accent` and the whole site re-skins itself — buttons, tags, hovers, 
 
 ---
 
+## ✅ Tests
+
+The site ships with no build step, but the behaviour in `js/tucklers.js` is covered
+by an automated suite that runs the real script against a headless DOM
+([jsdom](https://github.com/jsdom/jsdom)) using Node's built-in test runner — no
+extra framework, no browser needed.
+
+```bash
+npm install   # one-time: pulls jsdom (the only dev dependency)
+npm test      # runs everything under tests/
+```
+
+What's covered:
+
+- **Shopping bag** — the badge counter increments on *Add to Bag*, persists to
+  `localStorage`, and is restored on the next visit.
+- **Filter + search** — category pills, live name search, the two combined (AND),
+  and the empty-state message.
+- **Forms** — newsletter email validation and subscriber capture, plus the contact
+  form's required-field and email checks.
+- **Navigation** — the mobile slide-out toggle and active-link highlighting.
+- **Page integrity** — every shipped HTML page parses, has a title, loads the shared
+  script, and exposes the ids/data hooks the script depends on.
+
+---
+
 ## 🧰 Built with
 
 Plain **HTML5**, **CSS3** (custom properties, flexbox, grid) and **vanilla JavaScript** —

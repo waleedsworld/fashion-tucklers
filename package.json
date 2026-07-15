@@ -1,0 +1,12 @@
+{
+  "name": "tucklers-soft-layers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tucklers Soft Layers storefront landing site — plain HTML, CSS and vanilla JavaScript.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}
