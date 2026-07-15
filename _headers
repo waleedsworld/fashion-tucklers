@@ -1,0 +1,14 @@
+# Long-lived caching for fingerprint-stable static assets
+/css/*
+  Cache-Control: public, max-age=31536000
+/js/*
+  Cache-Control: public, max-age=31536000
+/images/*
+  Cache-Control: public, max-age=31536000
+
+# HTML should revalidate so content updates ship promptly
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
