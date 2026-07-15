@@ -51,11 +51,13 @@ test("the products page wires the filter + search UI the script expects", () => 
     assert.ok(card.getAttribute("data-name"), "a product card is missing data-name");
   }
 
-  // Each category referenced by a pill (except "all") maps to a real card.
+  // Each category referenced by a pill maps to a real card. "all" and the
+  // special "saved" (wishlist) view are virtual filters, not categories.
+  const virtualFilters = new Set(["all", "saved"]);
   const cats = new Set([...cards].map((c) => c.getAttribute("data-cat")));
   for (const pill of pills) {
     const f = pill.getAttribute("data-filter");
-    if (f !== "all") {
+    if (!virtualFilters.has(f)) {
       assert.ok(cats.has(f), `filter "${f}" has no matching product`);
     }
   }
