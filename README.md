@@ -13,18 +13,19 @@ Bombers, puffers, leather and wool. All warmth, no bulk, no build step.
 [![Dependencies](https://img.shields.io/badge/npm%20deps-0-success)](#-built-with)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+**Live demo:** deploying soon
+
 ![Tucklers home page](docs/media/home-desktop.png)
 
 </div>
 
 ---
 
-## 🎬 See it in motion
+## 🎬 Take the tour
 
-![Tucklers walkthrough](assets/demo.gif)
+A quick walk through the storefront — Home, Products, About, Reviews and Contact:
 
-> **Note:** `assets/demo.gif` is a placeholder. Drop in a real screen recording of the
-> filter, the shopping bag counter and the mobile menu to bring this section to life.
+![Tucklers site tour](assets/demo.gif)
 
 ---
 
@@ -151,7 +152,9 @@ fashion-tucklers/
 │   ├── hero-jacket.svg, about-jackets.svg
 │   └── logo.png, *-icon.png    # Brand + UI icons
 ├── assets/
-│   └── demo.gif                # Walkthrough recording (placeholder)
+│   ├── demo.gif                # Animated storefront walkthrough
+│   ├── screenshot-home.png     # Home page still
+│   └── screenshot-products.png # Products page still
 └── docs/media/                 # Screenshots used in this README
 ```
 
